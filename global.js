@@ -61,8 +61,9 @@ function choiceToIndex(answer_text){
 // question    - Question object
 //
 // returns Boolean
-function is_correct_answer(answer_text, question){
+function is_correct_answer(answer_text){
   i = choiceToIndex(answer_text);
+  question = questions[questionIndex]
   if (question.possibleAnswers[i] === question.answer){
     return true;
   }
@@ -92,24 +93,44 @@ function update_question_result(correct){
 function process_answer_submission(){
   var user_answer = given_answer();
   update_question_result(is_correct_answer(user_answer, question1));
-}
-
-
-//
-var questions = [question1, question2, question3, question4]
+};
 
 // puts the first question and answer in the appropriate divs upon page load
 //
 // returns undefined (not intending this function to return anything useful)
-window.onload = function() {
+function displayQuestion() {
   var questionHTML = document.getElementById("question");
 
-  questionHTML.innerText = question1.question;
+  questionHTML.innerText = questions[questionIndex].question;
   
   var possibleAnswersHTML = document.getElementById("choices");
   
-  possibleAnswersHTML.innerText = getAllChoicesAsString(question1);  
+  possibleAnswersHTML.innerText = getAllChoicesAsString(questions[questionIndex]);  
   
+};
+
+//
+function clearAnswer(){
+  document.getElementById("answer").value = "";
+  document.getElementById("question_result").innerText = "";
 }
 
+//
+function nextQuestion(){
+  questionIndex++;
+  displayQuestion();
+  clearAnswer();
+};
 
+
+// Array of questions to be asked
+var questions = [question1, question2, question3, question4];
+
+var questionIndex = 0;
+
+// Load displayQuestion function when page loads.
+//
+// returns undefined (not intending this function to return anything useful)
+window.onload = function(){
+  displayQuestion();
+};
