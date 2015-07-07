@@ -37,19 +37,30 @@ function getAllChoicesAsString(question) {
   return choices;
 };
 
+// gets the answer in the 'answer' ID html element
 //
+// returns a String of what the input field contains
 function given_answer(){
   return document.getElementById("answer").value
 };
 
 // TODO check for valid answer
+// takes the answer_text as a string and returns its Index in the array
 //
+// answer_text - String that can be parsed into an Integer
+//
+// returns an Integer
 function choiceToIndex(answer_text){
   answerIndex = parseInt(answer_text);
   return (answerIndex - 1);
 }
 
+// returns Boolean indicating if the answer is correct
 //
+// answer_text - integer indicating the user's choice of answer
+// question    - Question object
+//
+// returns Boolean
 function is_correct_answer(answer_text, question){
   i = choiceToIndex(answer_text);
   if (question.possibleAnswers[i] === question.answer){
@@ -60,7 +71,11 @@ function is_correct_answer(answer_text, question){
   };    
 };
 
+//  changes the value of the question_result div
 //
+// correct - Boolean indicating whether the question is correct
+//
+// returns undefined (not intending this function to return anything useful)
 function update_question_result(correct){
   var questionHTML = document.getElementById("question_result");
   if (correct){
@@ -71,10 +86,21 @@ function update_question_result(correct){
   }
 }
 
+// processes an answer from the input field and displays right or wrong in the div
+//
+// returns undefined
+function process_answer_submission(){
+  var user_answer = given_answer();
+  update_question_result(is_correct_answer(user_answer, question1));
+}
+
+
 //
 var questions = [question1, question2, question3, question4]
 
+// puts the first question and answer in the appropriate divs upon page load
 //
+// returns undefined (not intending this function to return anything useful)
 window.onload = function() {
   var questionHTML = document.getElementById("question");
 
