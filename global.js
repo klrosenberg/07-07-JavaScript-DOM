@@ -61,6 +61,17 @@ function is_correct_answer(answer_text, question){
 };
 
 //
+function update_question_result(correct){
+  var questionHTML = document.getElementById("question_result");
+  if (correct){
+    questionHTML.innerText = "Success!";
+  }
+  else{
+    questionHTML.innerText = "Wrong! Which is harsh in my opinion."
+  }
+}
+
+//
 var questions = [question1, question2, question3, question4]
 
 //
