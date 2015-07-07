@@ -92,7 +92,7 @@ function update_question_result(correct){
 // returns undefined
 function process_answer_submission(){
   var user_answer = given_answer();
-  update_question_result(is_correct_answer(user_answer, question1));
+  update_question_result(is_correct_answer(user_answer, questions[questionIndex]));
 };
 
 // puts the first question and answer in the appropriate divs upon page load
@@ -109,6 +109,14 @@ function displayQuestion() {
   
 };
 
+
+// returns the final score as an Integer
+//
+// returns Integer
+function finalScore() {
+  return ((score/questions.length) * 100);
+}
+
 //
 function clearAnswer(){
   document.getElementById("answer").value = "";
@@ -117,12 +125,24 @@ function clearAnswer(){
 
 //
 function nextQuestion(){
-  questionIndex++;
-  displayQuestion();
-  clearAnswer();
+  if (is_correct_answer(given_answer(), questions[questionIndex])) {
+    score++;
+  }
+  if (questionIndex < (questions.length - 1)){
+    questionIndex++;
+    displayQuestion();
+    clearAnswer();
+  }
+  else {
+    s = 1;
+    document.getElementById("total_result").innerText = "Your score is " + score + "/" + questions.length + "=" + finalScore() + "%.";
+    document.getElementById("answer").style.display = "none";
+    document.getElementById("submitter").style.display = "none";
+    document.getElementById("next").style.display = "none";
+  }
 };
 
-
+var score = 0;
 // Array of questions to be asked
 var questions = [question1, question2, question3, question4];
 
