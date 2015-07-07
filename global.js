@@ -24,6 +24,18 @@ var question4 = {
   possibleAnswers: [3, 4, 5, 14] 
 };
 
+// returns all choices for this question as a String
+//
+//   question - Question object
+//
+// returns String
+function getAllChoicesAsString(question) {
+  choices = "";
+  for (count = 0; count < question.possibleAnswers.length; count++ ){
+    choices += "<br> " + (count + 1) + ". " + question.possibleAnswers[count];
+  }
+  return choices;
+}
 
 
 var questions = [question1, question2, question3, question4]
@@ -33,4 +45,9 @@ window.onload = function() {
   var questionHTML = document.getElementById("question");
 
   questionHTML.innerText = question1.question;
+  
+  var possibleAnswersHTML = document.getElementById("choices");
+  
+  possibleAnswersHTML.innerText = getAllChoicesAsString(question1);  
+  
 }
