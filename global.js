@@ -32,11 +32,14 @@ var question4 = {
 function getAllChoicesAsString(question) {
   choices = "";
   for (count = 0; count < question.possibleAnswers.length; count++ ){
-    choices += "<br> " + (count + 1) + ". " + question.possibleAnswers[count];
-  }
+    choices += "\n" + (count + 1) + ". " + question.possibleAnswers[count];
+  };
   return choices;
-}
+};
 
+function given_answer(){
+  return document.getElementById("answer").value
+};
 
 var questions = [question1, question2, question3, question4]
 
@@ -51,3 +54,5 @@ window.onload = function() {
   possibleAnswersHTML.innerText = getAllChoicesAsString(question1);  
   
 }
+
+
