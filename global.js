@@ -37,13 +37,33 @@ function getAllChoicesAsString(question) {
   return choices;
 };
 
+//
 function given_answer(){
   return document.getElementById("answer").value
 };
 
+// TODO check for valid answer
+//
+function choiceToIndex(answer_text){
+  answerIndex = parseInt(answer_text);
+  return (answerIndex - 1);
+}
+
+//
+function is_correct_answer(answer_text, question){
+  i = choiceToIndex(answer_text);
+  if (question.possibleAnswers[i] === question.answer){
+    return true;
+  }
+  else {
+    return false;
+  };    
+};
+
+//
 var questions = [question1, question2, question3, question4]
 
-
+//
 window.onload = function() {
   var questionHTML = document.getElementById("question");
 
